@@ -1,0 +1,30 @@
+# إعدادات Cloudflare Workers لتطبيق حِمى
+name = "himma"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# الملفات الثابتة (واجهة الأهل وواجهة الجهاز)
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
+
+# قاعدة البيانات: ضع هنا database_id الذي يظهر بعد تنفيذ:  npx wrangler d1 create himma-db
+[[d1_databases]]
+binding = "DB"
+database_name = "himma-db"
+database_id = "ضع-المعرّف-هنا"
+
+# فحص سجلات DNS كل دقيقة
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+TZ = "Africa/Algiers"
+# اسم بوت تيليغرام بدون @ (تحصل عليه من BotFather)
+TELEGRAM_BOT_USERNAME = "ضع_اسم_البوت_هنا"
+
+# الأسرار تُضاف بالأوامر ولا تُكتب هنا:
+#   npx wrangler secret put SECRET_KEY
+#   npx wrangler secret put TELEGRAM_BOT_TOKEN
+#   npx wrangler secret put TELEGRAM_WEBHOOK_SECRET
