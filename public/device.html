@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>حِمى — الجهاز</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  body{background:#0A2342;color:#fff}
+  .center{min-height:100vh}
+  .tvcard{background:#0F2E45;border:1px solid #1E3A52;border-radius:20px;padding:26px;max-width:460px;width:100%;text-align:center}
+  .big{color:#E2BE7E}
+  .inp{background:#0A1F30;border-color:#1E3A52;color:#fff}
+  .msg{margin-top:16px;background:#FFD166;color:#3A2A00;border-radius:14px;padding:14px;font-weight:800}
+  .paused{margin-top:16px;font-size:18px}
+</style>
+</head>
+<body>
+<div class="center">
+  <div class="tvcard">
+    <h2>🛡️ حِمى</h2>
+    <div id="pairView">
+      <p style="margin-top:8px;color:#BFD5DF">أدخل الرمز الظاهر في تطبيق الأهل</p>
+      <input class="inp" id="codeIn" placeholder="مثال: 123456" dir="ltr" style="text-align:center;font-size:22px;letter-spacing:4px">
+      <input class="inp" id="nameIn" placeholder="اسم هذا الجهاز (مثال: تلفاز الصالون)">
+      <button class="btn" id="confirmBtn">ربط الجهاز</button>
+    </div>
+    <div id="liveView" hidden>
+      <p id="devName" style="font-size:20px;font-weight:800"></p>
+      <div id="statusOk" style="color:#9FE8C8;margin-top:6px">🟢 الحماية مفعّلة على هذا الجهاز</div>
+      <div id="pausedBox" class="paused" hidden>⏸ تم إيقاف هذا الجهاز من الأهل</div>
+      <div id="msgBox" class="msg" hidden></div>
+    </div>
+  </div>
+</div>
+<script src="app-device.js"></script>
+</body>
+</html>
