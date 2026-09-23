@@ -1,0 +1,17 @@
+{
+  "name": "himma",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:create": "wrangler d1 create himma-db",
+    "db:migrate": "wrangler d1 execute himma-db --remote --file=./schema.sql",
+    "db:migrate:local": "wrangler d1 execute himma-db --local --file=./schema.sql",
+    "test": "node --experimental-sqlite test/run.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0"
+  }
+}
