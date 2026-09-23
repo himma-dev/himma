@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>حِمى — لوحة الأهل</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="auth" class="center">
+  <div class="card" style="width:100%;max-width:420px">
+    <h3>🛡️ حِمى</h3>
+    <p class="sub">حماية أبنائك أمام الشاشة</p>
+    <div id="authForm">
+      <input class="inp" id="childName" placeholder="اسم الطفل (مثال: سارة)">
+      <button class="btn" id="signupBtn">إنشاء حساب عائلة جديد</button>
+      <p class="sub" style="margin-top:14px">لديك حساب على هذا الخادم؟ الصق رمز الدخول:</p>
+      <input class="inp" id="tokenIn" placeholder="رمز الدخول" dir="ltr">
+      <button class="btn ghost" id="loginBtn">دخول</button>
+    </div>
+  </div>
+</div>
+
+<div id="app" class="wrap" hidden>
+  <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+    <div><b id="hello">حِمى</b><div class="sub" id="dnsState" style="margin:0">—</div></div>
+    <button class="btn ghost" id="logoutBtn" style="width:auto;padding:8px 14px">خروج</button>
+  </div>
+
+  <div class="card" id="tokenCard">
+    <h3>🔑 رمز الدخول لهذا الحساب</h3>
+    <p class="sub">احتفظ به في مكان آمن؛ يُستخدم لتسجيل الدخول من أي متصفح آخر. لن يُعرض مجدداً.</p>
+    <div class="big" id="tokenShow" style="font-size:16px;word-break:break-all"></div>
+  </div>
+
+  <div class="card">
+    <h3>الأجهزة</h3>
+    <p class="sub">حدّد جهازاً أو أكثر وطبّق إجراءً على الجميع معاً.</p>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <button class="btn ghost" id="selAll" style="width:auto;padding:8px 12px;font-size:13px">تحديد الكل</button>
+      <button class="btn" id="pauseSel" style="width:auto;padding:8px 12px;font-size:13px">إيقاف المحدد</button>
+      <button class="btn ghost" id="resumeSel" style="width:auto;padding:8px 12px;font-size:13px">استئناف</button>
+    </div>
+    <div id="devList"></div>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <input class="inp" id="msgTxt" placeholder="رسالة للأجهزة المحددة" style="margin:0">
+      <button class="btn" id="sendMsg" style="width:auto;padding:0 16px">إرسال</button>
+    </div>
+    <button class="btn ghost" id="addDev" style="margin-top:10px">＋ إضافة جهاز جديد (تلفاز أو هاتف)</button>
+    <div id="pairBox" hidden style="margin-top:12px;background:var(--pri-soft);border-radius:14px;padding:14px">
+      <p>افتح تطبيق حِمى على الجهاز الجديد وأدخل هذا الرمز:</p>
+      <div class="big" id="pairCode">------</div>
+      <p class="sub" id="pairState">بانتظار الجهاز…</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>🌙 جدول الإيقاف التلقائي</h3>
+    <p class="sub">أوقفوا كل الأجهزة تلقائياً خارج الأوقات المسموحة، مثل وقت النوم أو الدراسة.</p>
+    <div class="row"><span>تفعيل الجدول</span><button class="sw" id="schedSw" role="switch"></button></div>
+    <div id="schedTimes" style="display:flex;gap:10px;margin-top:8px">
+      <div style="flex:1"><label class="f" style="font-size:12px;color:var(--muted)">يبدأ الإيقاف</label><input class="inp" id="schedStart" type="time" style="margin:0"></div>
+      <div style="flex:1"><label class="f" style="font-size:12px;color:var(--muted)">ينتهي الإيقاف</label><input class="inp" id="schedEnd" type="time" style="margin:0"></div>
+    </div>
+    <button class="btn ghost" id="schedSave" style="margin-top:10px">حفظ الجدول</button>
+  </div>
+
+  <div class="card" style="text-align:center;background:var(--pri-soft);border-color:transparent">
+    <h3>☕ ادعم حِمى</h3>
+    <p class="sub">التطبيق مجاني بالكامل. إن أعجبك، يمكنك دعم استمراره بمبلغ صغير.</p>
+    <a class="btn" id="donateBtn" href="#" target="_blank" rel="noopener">ادعم المطوّر</a>
+  </div>
+
+  <div class="card">
+    <h3>قنوات التنبيه</h3>
+    <div class="row"><span>إشعار (لاحقاً)</span><button class="sw" data-k="push" role="switch"></button></div>
+    <div class="row"><span>Telegram</span><button class="sw" data-k="telegram" role="switch"></button></div>
+    <div class="row"><span>واتساب (مدفوع، لاحقاً)</span><button class="sw" data-k="whatsapp" role="switch"></button></div>
+    <div class="row"><span>SMS (مدفوع، لاحقاً)</span><button class="sw" data-k="sms" role="switch"></button></div>
+    <div class="row"><span>اتصال هاتفي (مدفوع، لاحقاً)</span><button class="sw" data-k="call" role="switch"></button></div>
+  </div>
+
+  <div class="card">
+    <h3>ربط بوت Telegram</h3>
+    <p class="sub">لتصلك التنبيهات فوراً. اضغط الزر، ثم اضغط "ابدأ" داخل تيليغرام.</p>
+    <a class="btn" id="tgLink" href="#" target="_blank" rel="noopener">فتح بوت حِمى على Telegram</a>
+  </div>
+
+  <div class="card">
+    <h3>ربط الحماية (NextDNS)</h3>
+    <p class="sub">أنشئ حساباً مجانياً على nextdns.io، وألصق هنا رقم الملف (Profile ID) ومفتاح API من صفحة حسابك.</p>
+    <input class="inp" id="ndProfile" placeholder="رقم الملف (Profile ID)" dir="ltr">
+    <input class="inp" id="ndKey" placeholder="مفتاح API" dir="ltr" type="password">
+    <button class="btn" id="ndSave">حفظ إعدادات NextDNS</button>
+  </div>
+
+  <div class="card">
+    <h3>سجل المحاولات المحظورة</h3>
+    <ul class="log" id="log"></ul>
+    <p class="sub" id="logEmpty">لا توجد محاولات بعد.</p>
+  </div>
+
+  <script>
+  window.HIMMA_TG_BOT = ''; // مثال: 'himma_family_bot'  (بدون @)
+  window.HIMMA_DONATE_URL = ''; // مثال: 'https://www.buymeacoffee.com/اسمك'
+  </script>
+  <script src="app-parent.js"></script>
+</div>
+
+</body>
+                            </html>
